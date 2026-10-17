@@ -1,0 +1,24 @@
+Vagrant.configure("2") do |config|
+	config.vm.define "machine1" do |mo|
+		mo.vm.box = "ubuntu/focal64"
+		mo.vm.hostname = "rmouhcin"
+		mo.vm.network "private_network", ip: "192.168.56.110"
+	
+		mo.vm.provider "virtualbox" do |vb|
+			vb.memory = "1024"
+			vb.cpus = 1
+		end
+	end
+	config.vm.define "machine2" do |mt|
+		mt.vm.box = "ubuntu/focal64"
+		mt.vm.hostname = "rmouhcineeee"
+		mt.vm.network "private_network", ip: "192.168.56.111"
+	
+		mt.vm.provider "virtualbox" do |vb|
+			vb.memory = "1024"
+			vb.cpus = 1
+		end
+	end
+
+
+end

@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Depoyment
+metadata:
+        name: app1-deploy
+spec:
+        replicas: 1
+        selector:
+                matchLabels:
+                        app: app1-pods # manages pods that contains this label name
+        template:
+                metadata:
+                        labels:
+                                app: app1-pods
+                spec:
+                        containers:
+                                - name: whoami
+                                  image: traefik/whoami
+                                  ports:
+                                          - containerPort: 8080

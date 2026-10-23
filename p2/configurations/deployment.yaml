@@ -1,0 +1,73 @@
+# App-1
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app1-pods # manages pods that contains this label name
+  template:
+    metadata:
+      labels:
+        app: app1-pods
+    spec:
+      containers:
+        - name: app1-container
+          image: hashicorp/http-echo:0.2.3
+          args:
+          - "-text=Hello from app1 -.-"
+          ports:
+          - containerPort: 5678
+---
+
+# App-3
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app3-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app3-pods
+  template:
+    metadata:
+      labels:
+        app: app3-pods
+    spec:
+      containers:
+        - name: app3-container
+          image: hashicorp/http-echo:0.2.3
+          args:
+            - "-text=Hello from app3 -.-"
+          ports:
+            - containerPort: 5678
+---
+
+# App-2
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app2-deploy
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: app2-pods
+  template:
+    metadata:
+      labels:
+        app: app2-pods
+    spec:
+      containers:
+        - name: app2-container
+          image: hashicorp/http-echo:0.2.3
+          args:
+            - "-text=Hello from app2 (default :D)"
+          ports:
+            - containerPort: 5678
